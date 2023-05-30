@@ -73,23 +73,35 @@
         }
     }
 
-    findBookBy(type, value){
-        for(let i = 0; i < this.books.length; i++){
-            if (this.books[i][type] === value){
-                return this.books[i];
-            }
-        }
-        return null;
-    }
+    // findBookBy(type, value){
+    //     for(let i = 0; i < this.books.length; i++){
+    //         if (this.books[i][type] === value){
+    //             return this.books[i];
+    //         }
+    //     }
+    //     return null;
+    // }
 
-    giveBookByName(bookName){
-        for(let i = 0; i < this.books.length; i++){
-            if (this.books[i].name === bookName){
-                const book = this.books[i];
-                this.books.splice(i, 1);
-                return book;
-            }
-        }
-        return null;
-    }
+    findBookBy(type, value) {
+        const findResult = this.books.find((item) => item[type] === value);
+        return findResult || null;
+       }
+
+    // giveBookByName(bookName){
+    //     for(let i = 0; i < this.books.length; i++){
+    //         if (this.books[i].name === bookName){
+    //             const book = this.books[i];
+    //             this.books.splice(i, 1);
+    //             return book;
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    giveBookByName(bookName) {
+        const book = this.findBookBy("name", bookName);
+        if (!book) return null;
+        this.books = this.books.filter((item) => item.name !== bookName);
+        return book;
+      }
  }
